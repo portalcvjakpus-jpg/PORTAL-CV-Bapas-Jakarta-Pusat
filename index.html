@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PORTAL-CV Bapas Jakarta Pusat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@0.321.0/dist/umd/lucide.min.js"></script>
@@ -13,337 +13,329 @@
         
         :root {
             --navy: #001f3f;
-            --navy-dark: #001529;
-            --gold: #D4AF37;
-            --bg-dashboard: #f0f4f8; 
-            --paper-width: 210mm;
-            --paper-height: 297mm;
-            --margin-left: 10mm;   
-            --margin-right: 10mm; 
-            --margin-top-h1: 15mm; 
-            --margin-top-h2: 10mm;  
-            --margin-bottom: 15mm;
+            --navy-dark: #000c1a;
+            --gold: #FFD700;
+            --bg-soft: #f8fafc;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-dashboard);
-            color: #1a1a1a;
+            background-color: var(--bg-soft);
+            color: #1e293b;
+            overscroll-behavior-y: contain;
         }
 
+        /* --- Modern Navigation Style --- */
         .step-bubble {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid #cbd5e1;
-            background: white;
-            color: #64748b;
-        }
-        .step-item.active .step-bubble {
-            background: var(--navy);
-            border-color: var(--navy);
-            color: var(--gold);
-            box-shadow: 0 4px 12px rgba(0, 31, 63, 0.2);
-        }
-        .step-item.completed .step-bubble {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--navy);
-        }
-
-        #cv-render-area {
-            background-color: #1e293b; 
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        .cv-page {
-            width: var(--paper-width);
-            height: var(--paper-height);
-            background: white;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            box-sizing: border-box;
-            font-family: "Times New Roman", Times, serif;
-            color: black; 
-            transform-origin: top center;
-            position: relative;
-        }
-
-        .page-1 { padding: var(--margin-top-h1) var(--margin-right) var(--margin-bottom) var(--margin-left); }
-        .page-multi { padding: var(--margin-top-h2) var(--margin-right) var(--margin-bottom) var(--margin-left); }
-
-        .section-title {
-            border-bottom: 1.5pt solid black;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 11pt;
-            margin-top: 12pt;
-            margin-bottom: 6pt;
-            padding-bottom: 2pt;
-            color: black;
-        }
-        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-top: 5pt; color: black; }
-        .item-title-group { font-weight: bold; font-size: 10.5pt; flex: 1; color: black; }
-        .item-date { font-size: 10pt; font-weight: bold; text-align: right; margin-left: 10px; color: black; }
-        .item-subtitle { font-style: italic; font-size: 10pt; margin-top: 1pt; color: black; } 
-        .item-desc { font-size: 10pt; text-align: justify; line-height: 1.4; margin-top: 1pt; color: black; }
-
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold) 0%, #b8962d 100%);
-            color: var(--navy-dark);
-            transition: all 0.2s ease;
-        }
-        .btn-gold:hover { transform: translateY(-1px); filter: brightness(1.1); }
-
-        .input-card {
-            background: white;
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-        }
-
-        .hidden-panel { display: none; }
-
-        .photo-preview-box {
-            width: 120px;
-            height: 150px;
-            border: 2px dashed #cbd5e1;
+            width: 32px;
+            height: 32px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background: #f8fafc;
-            cursor: pointer;
-            position: relative;
-        }
-        .photo-preview-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            font-weight: 800;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            background: white;
+            color: #94a3b8;
         }
 
-        @media (max-width: 1024px) {
-            .cv-page { transform: scale(0.42); margin-bottom: -170mm; }
+        .step-item.active .step-bubble {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 31, 63, 0.2);
+        }
+
+        .step-item.completed .step-bubble {
+            background: #f0fdf4;
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        /* --- Mobile Preview Slide Up --- */
+        @media (max-width: 1023px) {
+            #cv-render-area {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #0f172a;
+                z-index: 200;
+                transform: translateY(100%);
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex;
+                flex-direction: column;
+            }
+            #cv-render-area.active { transform: translateY(0); }
+            
+            .preview-handle {
+                width: 40px;
+                height: 4px;
+                background: rgba(255,255,255,0.2);
+                border-radius: 2px;
+                margin: 12px auto;
+            }
+            
+            .cv-page {
+                transform: scale(0.42);
+                transform-origin: top center;
+                margin-top: -160mm; /* Menghilangkan whitespace akibat scale */
+            }
+        }
+
+        /* --- CV Paper Base --- */
+        .cv-page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin: 0 auto 20px auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            font-family: "Times New Roman", serif;
+            color: black;
+            position: relative;
+        }
+
+        @media (min-width: 1024px) {
+            .cv-page { transform: scale(0.7); margin-bottom: -80mm; }
+        }
+
+        @media (min-width: 1440px) {
+            .cv-page { transform: scale(0.9); margin-bottom: -20mm; }
+        }
+
+        /* --- Animations --- */
+        .fade-step {
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="h-screen flex flex-col">
+<body class="h-screen flex flex-col lg:flex-row overflow-hidden">
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="fixed inset-0 bg-navy-dark/95 z-[9999] hidden flex-col items-center justify-center text-white">
-        <div class="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mb-6"></div>
-        <p class="font-bold text-gold uppercase tracking-[0.2em] text-sm animate-pulse">Memproses Data PORTAL-CV...</p>
+    <div id="loading-overlay" class="fixed inset-0 bg-navy-dark z-[999] hidden flex-col items-center justify-center text-white">
+        <div class="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="font-bold tracking-widest animate-pulse">GENERATING PDF...</p>
     </div>
 
-    <!-- Header Navbar -->
-    <header class="h-20 bg-[#001529] flex items-center justify-between px-8 shrink-0 z-50 border-b border-white/10">
-        <div class="flex items-center gap-4">
-            <div class="bg-white p-1 rounded-lg w-12 h-12 flex items-center justify-center shadow-lg overflow-hidden">
-                <img src="https://lh3.googleusercontent.com/d/1rcy1WQfVF1DNhXdWf-FfNTqOZx4qLJ0b" alt="Logo Bapas" class="h-full object-contain" onerror="this.src='https://ui-avatars.com/api/?name=Bapas+Jakpus&background=FFFFFF&color=001f3f&bold=true'">
+    <aside class="w-full lg:w-80 bg-white border-b lg:border-r border-slate-200 flex flex-col z-[150] shadow-sm">
+        <div class="p-4 lg:p-6 bg-navy flex lg:flex-col items-center lg:items-start justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
+                    <img src="https://ui-avatars.com/api/?name=Bapas+Jakpus&background=FFFFFF&color=001f3f&bold=true" class="w-7 h-7">
+                </div>
+                <div>
+                    <h1 class="text-white font-extrabold text-sm tracking-tight">PORTAL CV</h1>
+                    <p class="text-gold text-[8px] font-black uppercase tracking-widest">Bapas Jakarta Pusat</p>
+                </div>
             </div>
-            <div>
-                <h1 class="text-white font-extrabold text-lg tracking-tight leading-none uppercase">PORTAL-CV</h1>
-                <p class="text-gold text-[10px] font-black uppercase mt-1 tracking-widest opacity-90">Bapas Jakarta Pusat</p>
-            </div>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="hidden md:flex bg-white/5 p-1 rounded-xl border border-white/10">
-                <button onclick="changeTemplate('classic')" id="btn-tpl-classic" class="px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-gold text-navy">Klasik</button>
-                <button onclick="changeTemplate('modern')" id="btn-tpl-modern" class="px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition text-white/60 hover:text-white">Modern Foto</button>
-            </div>
-            <button onclick="handleDownload()" class="btn-gold px-6 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 shadow-lg shadow-gold/20">
-                <i data-lucide="printer" class="w-4 h-4"></i> UNDUH PDF
+            <button onclick="handleDownload()" class="bg-gold text-navy px-4 py-2 rounded-lg text-[10px] font-black flex items-center gap-2 hover:brightness-110">
+                <i data-lucide="download" class="w-3 h-3"></i> UNDUH
             </button>
         </div>
-    </header>
 
-    <!-- Navigation Wizard -->
-    <nav class="bg-white border-b border-slate-200 px-6 py-4 shrink-0 no-print overflow-x-auto shadow-sm">
-        <div class="max-w-6xl mx-auto flex items-center justify-between min-w-[600px]">
-            <div onclick="switchTab(1)" id="step-1" class="step-item active cursor-pointer flex flex-col items-center gap-2 flex-1">
-                <div class="step-bubble">1</div>
-                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Biodata</span>
+        <nav class="flex-1 overflow-x-auto lg:overflow-y-auto p-4 custom-scroll">
+            <div class="flex lg:flex-col gap-4 min-w-max lg:min-w-0">
+                <button onclick="switchTab(1)" id="step-1" class="step-item active flex items-center gap-3 group">
+                    <div class="step-bubble">1</div>
+                    <div class="hidden lg:block text-left">
+                        <p class="text-[10px] font-black uppercase text-slate-400 group-[.active]:text-navy">Langkah 1</p>
+                        <p class="text-xs font-bold text-slate-500 group-[.active]:text-slate-900">Biodata Diri</p>
+                    </div>
+                </button>
+                <div class="hidden lg:block h-6 w-[2px] bg-slate-100 ml-4"></div>
+                <button onclick="switchTab(2)" id="step-2" class="step-item flex items-center gap-3 group">
+                    <div class="step-bubble">2</div>
+                    <div class="hidden lg:block text-left">
+                        <p class="text-[10px] font-black uppercase text-slate-400 group-[.active]:text-navy">Langkah 2</p>
+                        <p class="text-xs font-bold text-slate-500 group-[.active]:text-slate-900">Pengalaman</p>
+                    </div>
+                </button>
+                <div class="hidden lg:block h-6 w-[2px] bg-slate-100 ml-4"></div>
+                <button onclick="switchTab(3)" id="step-3" class="step-item flex items-center gap-3 group">
+                    <div class="step-bubble">3</div>
+                    <div class="hidden lg:block text-left">
+                        <p class="text-[10px] font-black uppercase text-slate-400 group-[.active]:text-navy">Langkah 3</p>
+                        <p class="text-xs font-bold text-slate-500 group-[.active]:text-slate-900">Pendidikan</p>
+                    </div>
+                </button>
+                <div class="hidden lg:block h-6 w-[2px] bg-slate-100 ml-4"></div>
+                <button onclick="switchTab(4)" id="step-4" class="step-item flex items-center gap-3 group">
+                    <div class="step-bubble">4</div>
+                    <div class="hidden lg:block text-left">
+                        <p class="text-[10px] font-black uppercase text-slate-400 group-[.active]:text-navy">Langkah 4</p>
+                        <p class="text-xs font-bold text-slate-500 group-[.active]:text-slate-900">Organisasi</p>
+                    </div>
+                </button>
+                <div class="hidden lg:block h-6 w-[2px] bg-slate-100 ml-4"></div>
+                <button onclick="switchTab(5)" id="step-5" class="step-item flex items-center gap-3 group">
+                    <div class="step-bubble">5</div>
+                    <div class="hidden lg:block text-left">
+                        <p class="text-[10px] font-black uppercase text-slate-400 group-[.active]:text-navy">Langkah 5</p>
+                        <p class="text-xs font-bold text-slate-500 group-[.active]:text-slate-900">Keahlian</p>
+                    </div>
+                </button>
             </div>
-            <div class="h-[2px] w-8 bg-slate-100"></div>
-            <div onclick="switchTab(2)" id="step-2" class="step-item cursor-pointer flex flex-col items-center gap-2 flex-1">
-                <div class="step-bubble">2</div>
-                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Pekerjaan</span>
-            </div>
-            <div class="h-[2px] w-8 bg-slate-100"></div>
-            <div onclick="switchTab(3)" id="step-3" class="step-item cursor-pointer flex flex-col items-center gap-2 flex-1">
-                <div class="step-bubble">3</div>
-                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Pendidikan</span>
-            </div>
-            <div class="h-[2px] w-8 bg-slate-100"></div>
-            <div onclick="switchTab(4)" id="step-4" class="step-item cursor-pointer flex flex-col items-center gap-2 flex-1">
-                <div class="step-bubble">4</div>
-                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Organisasi</span>
-            </div>
-            <div class="h-[2px] w-8 bg-slate-100"></div>
-            <div onclick="switchTab(5)" id="step-5" class="step-item cursor-pointer flex flex-col items-center gap-2 flex-1">
-                <div class="step-bubble">5</div>
-                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Keahlian</span>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-        <!-- Input Panel -->
-        <section class="flex-1 overflow-y-auto p-6 lg:p-10 no-print bg-slate-50/50">
-            <div class="max-w-2xl mx-auto space-y-8 pb-20">
-                <!-- Panel 1: Kontak -->
-                <div id="panel-1" class="panel-content space-y-6">
-                    <div class="input-card space-y-6">
-                        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                            <div class="p-2 bg-navy/5 rounded-lg"><i data-lucide="user" class="text-navy w-6 h-6"></i></div>
-                            <h2 class="text-xl font-extrabold text-navy">Informasi Kontak</h2>
-                        </div>
-                        
-                        <div class="flex flex-col md:flex-row gap-8">
-                            <div class="flex flex-col items-center gap-3">
-                                <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider">Foto Profil</label>
-                                <div onclick="document.getElementById('in-photo').click()" class="photo-preview-box group">
-                                    <img id="photo-preview-el" src="" class="hidden">
-                                    <div id="photo-placeholder" class="text-center p-4">
-                                        <i data-lucide="camera" class="w-8 h-8 mx-auto text-slate-300 group-hover:text-gold transition"></i>
-                                        <p class="text-[9px] text-slate-400 mt-2">Klik untuk Unggah</p>
-                                    </div>
-                                </div>
-                                <input type="file" id="in-photo" accept="image/*" class="hidden" onchange="handlePhotoUpload(this)">
-                                <button onclick="removePhoto()" id="btn-remove-photo" class="hidden text-[10px] font-bold text-red-400 hover:text-red-600 uppercase">Hapus Foto</button>
-                            </div>
-
-                            <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div class="md:col-span-2">
-                                    <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Nama Lengkap & Gelar</label>
-                                    <input type="text" id="in-name" oninput="updateCV()" value="Dr. Budi Santoso, M.M." class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 ring-navy/10 outline-none font-semibold">
-                                </div>
-                                <div>
-                                    <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Nomor Telepon</label>
-                                    <input type="text" id="in-phone" oninput="updateCV()" value="+62 812 3456 7890" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
-                                </div>
-                                <div>
-                                    <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Alamat Email</label>
-                                    <input type="email" id="in-email" oninput="updateCV()" value="budi.santoso@email.com" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Lokasi Domisili</label>
-                                    <input type="text" id="in-location" oninput="updateCV()" value="Jakarta Pusat, Indonesia" class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+    <main class="flex-1 overflow-y-auto bg-slate-50 relative p-4 lg:p-8 custom-scroll">
+        <div class="max-w-3xl mx-auto pb-32">
+            
+            <div id="panel-1" class="panel-content fade-step space-y-6">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-extrabold text-navy mb-6 flex items-center gap-2">
+                        <i data-lucide="user-circle"></i> Biodata Diri
+                    </h2>
+                    
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-auto flex flex-col items-center">
+                            <div onclick="document.getElementById('in-photo').click()" class="w-32 h-40 bg-slate-100 rounded-2xl border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:border-navy overflow-hidden group">
+                                <img id="photo-preview-el" class="hidden w-full h-full object-cover">
+                                <div id="photo-placeholder" class="text-center p-2">
+                                    <i data-lucide="camera" class="w-8 h-8 mx-auto text-slate-400 group-hover:scale-110 transition"></i>
+                                    <p class="text-[10px] font-bold text-slate-400 mt-2 uppercase">Foto Formal</p>
                                 </div>
                             </div>
+                            <input type="file" id="in-photo" class="hidden" onchange="handlePhotoUpload(this)">
+                            <button onclick="removePhoto()" id="btn-remove-photo" class="hidden mt-3 text-[10px] font-bold text-red-500 uppercase tracking-wider">Hapus Foto</button>
                         </div>
 
-                        <div class="pt-4 border-t border-slate-50">
-                            <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider mb-2 block">Profil Profesional Singkat</label>
-                            <textarea id="in-summary" oninput="updateCV()" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl h-28 resize-none outline-none focus:bg-white transition">Profesional yang berdedikasi dengan pengalaman yang relevan. Memiliki integritas tinggi dan siap berkontribusi positif bagi instansi/lembaga.</textarea>
+                        <div class="flex-1 grid grid-cols-1 gap-5 w-full">
+                            <div>
+                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Nama Lengkap & Gelar</label>
+                                <input type="text" id="in-name" oninput="updateCV()" placeholder="Nama Sesuai Ijazah" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy focus:bg-white transition-all outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Nomor HP/WA</label>
+                                    <input type="text" id="in-phone" oninput="updateCV()" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Alamat Email</label>
+                                    <input type="email" id="in-email" oninput="updateCV()" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button onclick="switchTab(2)" class="w-full btn-gold py-4.5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 shadow-xl shadow-gold/20">
-                        Lanjut ke Pekerjaan <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
+                    <div class="mt-6">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Domisili Saat Ini</label>
+                        <input type="text" id="in-location" oninput="updateCV()" placeholder="Contoh: Gambir, Jakarta Pusat" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                    </div>
                 </div>
+            </div>
 
-                <!-- Panel 2: Pekerjaan -->
-                <div id="panel-2" class="panel-content hidden-panel space-y-6">
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                        <div><h2 class="text-lg font-extrabold text-navy">Riwayat Pekerjaan</h2><p class="text-xs text-slate-400">Tambahkan pengalaman kerja terbaru</p></div>
-                        <button onclick="addEntry('experience')" class="bg-navy text-gold px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 hover:bg-navy-dark transition"><i data-lucide="plus-circle" class="w-4 h-4"></i> TAMBAH</button>
+            <div id="panel-2" class="panel-content hidden fade-step space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-extrabold text-navy uppercase tracking-tight">Pengalaman Kerja</h2>
+                        <button onclick="addEntry('experience')" class="bg-navy text-gold p-2 rounded-lg"><i data-lucide="plus"></i></button>
                     </div>
                     <div id="experience-list" class="space-y-4"></div>
-                    <div class="flex gap-4 pt-4">
-                        <button onclick="switchTab(1)" class="flex-1 bg-white border border-slate-200 py-4.5 rounded-2xl font-bold text-slate-400 uppercase tracking-widest text-xs">Kembali</button>
-                        <button onclick="switchTab(3)" class="flex-[2] btn-gold py-4.5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3">Lanjut ke Pendidikan <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Panel 3: Pendidikan -->
-                <div id="panel-3" class="panel-content hidden-panel space-y-6">
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                        <div><h2 class="text-lg font-extrabold text-navy">Riwayat Pendidikan</h2><p class="text-xs text-slate-400">Gelar akademik Anda</p></div>
-                        <button onclick="addEntry('education')" class="bg-navy text-gold px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 hover:bg-navy-dark transition"><i data-lucide="plus-circle" class="w-4 h-4"></i> TAMBAH</button>
+            <div id="panel-3" class="panel-content hidden fade-step space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-extrabold text-navy uppercase tracking-tight">Riwayat Pendidikan</h2>
+                        <button onclick="addEntry('education')" class="bg-navy text-gold p-2 rounded-lg"><i data-lucide="plus"></i></button>
                     </div>
                     <div id="education-list" class="space-y-4"></div>
-                    <div class="flex gap-4 pt-4">
-                        <button onclick="switchTab(2)" class="flex-1 bg-white border border-slate-200 py-4.5 rounded-2xl font-bold text-slate-400 uppercase tracking-widest text-xs">Kembali</button>
-                        <button onclick="switchTab(4)" class="flex-[2] btn-gold py-4.5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3">Lanjut ke Organisasi <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Panel 4: Organisasi -->
-                <div id="panel-4" class="panel-content hidden-panel space-y-6">
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                        <div><h2 class="text-lg font-extrabold text-navy">Pengalaman Organisasi</h2><p class="text-xs text-slate-400">Aktivitas organisasi atau kerelawanan</p></div>
-                        <button onclick="addEntry('organization')" class="bg-navy text-gold px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 hover:bg-navy-dark transition"><i data-lucide="plus-circle" class="w-4 h-4"></i> TAMBAH</button>
+            <div id="panel-4" class="panel-content hidden fade-step space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-extrabold text-navy uppercase tracking-tight">Organisasi</h2>
+                        <button onclick="addEntry('organization')" class="bg-navy text-gold p-2 rounded-lg"><i data-lucide="plus"></i></button>
                     </div>
                     <div id="organization-list" class="space-y-4"></div>
-                    <div class="flex gap-4 pt-4">
-                        <button onclick="switchTab(3)" class="flex-1 bg-white border border-slate-200 py-4.5 rounded-2xl font-bold text-slate-400 uppercase tracking-widest text-xs">Kembali</button>
-                        <button onclick="switchTab(5)" class="flex-[2] btn-gold py-4.5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3">Terakhir: Keahlian <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
-                    </div>
-                </div>
-
-                <!-- Panel 5: Keahlian -->
-                <div id="panel-5" class="panel-content hidden-panel space-y-6">
-                    <div class="input-card space-y-6">
-                        <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                            <div class="p-2 bg-navy/5 rounded-lg"><i data-lucide="award" class="text-navy w-6 h-6"></i></div>
-                            <h2 class="text-xl font-extrabold text-navy">Keahlian & Kompetensi</h2>
-                        </div>
-                        <div>
-                            <label class="text-[11px] font-black text-slate-500 uppercase tracking-wider mb-2 block">Daftar Skill (Pisahkan dengan Koma)</label>
-                            <textarea id="in-skills" oninput="updateCV()" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl h-44 resize-none outline-none focus:bg-white transition leading-relaxed font-medium">Manajemen Strategis, Analisis Kebijakan Publik, Kepemimpinan Tim, Microsoft Office Suite, Bahasa Inggris, Manajemen Risiko, Administrasi Digital.</textarea>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <button onclick="switchTab(4)" class="flex-1 bg-white border border-slate-200 py-4.5 rounded-2xl font-bold text-slate-400 uppercase tracking-widest text-xs">Kembali</button>
-                        <button onclick="handleDownload()" class="flex-[2] btn-gold py-4.5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 shadow-2xl">Unduh PDF Sekarang <i data-lucide="download-cloud" class="w-5 h-5"></i></button>
-                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Preview Panel -->
-        <section id="cv-render-area" class="lg:w-[480px] xl:w-[900px] border-l border-slate-200">
-            <div class="mb-6 flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full border border-white/5 backdrop-blur-md">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span class="text-[10px] text-white/70 uppercase font-black tracking-[0.2em]">Live Preview</span>
+            <div id="panel-5" class="panel-content hidden fade-step space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-extrabold text-navy uppercase tracking-tight mb-6">Keahlian & Kompetensi</h2>
+                    <textarea id="in-skills" oninput="updateCV()" class="w-full h-40 p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white transition-all" placeholder="Gunakan koma untuk memisahkan keahlian..."></textarea>
+                </div>
             </div>
-            <div id="pages-container"></div>
-        </section>
+
+            <div class="fixed bottom-0 left-0 right-0 lg:absolute lg:bottom-10 lg:left-8 lg:right-8 p-4 bg-white/80 backdrop-blur-md lg:bg-transparent flex justify-between gap-4 z-[100]">
+                <button id="prevBtn" onclick="switchTab(activeTab - 1)" class="flex-1 lg:flex-none px-8 py-4 rounded-2xl font-bold text-slate-400 bg-slate-100 disabled:opacity-0 transition-all">KEMBALI</button>
+                <button id="nextBtn" onclick="activeTab === 5 ? handleDownload() : switchTab(activeTab + 1)" class="flex-[2] lg:flex-none px-12 py-4 rounded-2xl font-black text-navy bg-gold shadow-lg shadow-gold/20 tracking-widest transition-transform active:scale-95 uppercase text-xs">
+                    Lanjut
+                </button>
+            </div>
+        </div>
     </main>
 
+    <section id="cv-render-area" class="lg:w-[550px] xl:w-[700px] 2xl:w-[850px] bg-slate-800 lg:border-l border-slate-700 overflow-y-auto custom-scroll p-4">
+        <div class="lg:hidden preview-handle"></div>
+        <div class="flex items-center justify-between lg:justify-end mb-4 px-2">
+            <span class="text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] lg:hidden">Live Preview</span>
+            <div class="flex gap-2">
+                <button onclick="togglePreview(false)" class="lg:hidden p-2 bg-white/10 rounded-full text-white"><i data-lucide="x"></i></button>
+                <div class="hidden lg:flex bg-black/20 p-1 rounded-lg">
+                    <button onclick="currentTemplate='classic'; updateCV()" class="px-3 py-1 text-[9px] font-bold rounded-md bg-white/10 text-white">KLASIK</button>
+                    <button onclick="currentTemplate='modern'; updateCV()" class="px-3 py-1 text-[9px] font-bold rounded-md text-white/40 hover:text-white">MODERN</button>
+                </div>
+            </div>
+        </div>
+        <div id="pages-container" class="pb-24"></div>
+    </section>
+
+    <button onclick="togglePreview(true)" class="lg:hidden fixed bottom-24 right-6 w-14 h-14 bg-navy text-gold rounded-full shadow-2xl flex items-center justify-center z-[160] active:scale-90 transition-transform">
+        <i data-lucide="eye"></i>
+    </button>
+
     <script>
-        // State Global
+        // Data & State
+        let activeTab = 1;
         let currentTemplate = 'classic';
         let userPhotoBase64 = null;
-        const data = { 
-            experience: [
-                { id: 1, title: 'Kementerian Hukum & HAM RI', subtitle: 'Analisis Kebijakan Ahli Madya', location: 'Jakarta', date: '2020 - Sekarang', desc: 'Merumuskan draf kebijakan strategis untuk efisiensi birokrasi.\nMengawasi implementasi sistem digitalisasi data nasional.' },
-                { id: 2, title: 'Bapas Jakarta Pusat', subtitle: 'Staff Administrasi Senior', location: 'Jakarta Pusat', date: '2016 - 2020', desc: 'Mengelola basis data klien dengan akurasi tinggi.\nMengembangkan alur kerja lapor diri digital.' }
-            ], 
-            education: [
-                { id: 3, title: 'Universitas Indonesia', subtitle: 'Magister Administrasi Publik', location: 'Depok', date: '2014 - 2016', desc: 'Lulus dengan predikat Cum Laude.' }
-            ],
-            organization: [
-                { id: 4, title: 'Himpunan Mahasiswa', subtitle: 'Ketua Divisi PSDM', location: 'Depok', date: '2014 - 2015', desc: 'Mengoordinasi pengembangan sumber daya manusia organisasi.\nMenyelenggarakan pelatihan kepemimpinan untuk 50 peserta.' }
-            ]
-        };
+        const data = { experience: [], education: [], organization: [] };
 
+        function switchTab(step) {
+            if (step < 1 || step > 5) return;
+            activeTab = step;
+            
+            // UI Updates
+            document.querySelectorAll('.panel-content').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`panel-${step}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.step-item').forEach((el, idx) => {
+                const i = idx + 1;
+                el.classList.toggle('active', i === step);
+                el.classList.toggle('completed', i < step);
+            });
+
+            // Button Control
+            document.getElementById('prevBtn').disabled = step === 1;
+            document.getElementById('nextBtn').innerText = step === 5 ? 'UNDUH PDF' : 'LANJUT';
+            
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function togglePreview(show) {
+            document.getElementById('cv-render-area').classList.toggle('active', show);
+        }
+
+        // Logic Input (Sama dengan sebelumnya namun dengan UI baru)
         function handlePhotoUpload(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = (e) => {
                     userPhotoBase64 = e.target.result;
                     document.getElementById('photo-preview-el').src = userPhotoBase64;
                     document.getElementById('photo-preview-el').classList.remove('hidden');
@@ -357,45 +349,43 @@
 
         function removePhoto() {
             userPhotoBase64 = null;
-            document.getElementById('in-photo').value = "";
-            document.getElementById('photo-preview-el').src = "";
             document.getElementById('photo-preview-el').classList.add('hidden');
             document.getElementById('photo-placeholder').classList.remove('hidden');
             document.getElementById('btn-remove-photo').classList.add('hidden');
             updateCV();
         }
 
-        function changeTemplate(tpl) {
-            currentTemplate = tpl;
-            const btnClassic = document.getElementById('btn-tpl-classic');
-            const btnModern = document.getElementById('btn-tpl-modern');
-            
-            if(tpl === 'modern') {
-                btnModern.className = "px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-gold text-navy";
-                btnClassic.className = "px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition text-white/60 hover:text-white";
-            } else {
-                btnClassic.className = "px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-gold text-navy";
-                btnModern.className = "px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition text-white/60 hover:text-white";
-            }
+        function addEntry(type) {
+            data[type].push({ id: Date.now(), title: '', subtitle: '', date: '', desc: '' });
+            renderList(type);
             updateCV();
         }
 
-        function switchTab(step) {
-            document.querySelectorAll('.panel-content').forEach(p => p.classList.add('hidden-panel'));
-            document.getElementById(`panel-${step}`).classList.remove('hidden-panel');
-            document.querySelectorAll('.step-item').forEach((el, idx) => {
-                const currentIdx = idx + 1;
-                el.classList.remove('active', 'completed');
-                if (currentIdx === step) el.classList.add('active');
-                else if (currentIdx < step) el.classList.add('completed');
+        function renderList(type) {
+            const container = document.getElementById(`${type}-list`);
+            container.innerHTML = '';
+            data[type].forEach(item => {
+                const div = document.createElement('div');
+                div.className = "p-4 bg-slate-50 rounded-2xl border border-slate-200 relative group animate-in slide-in-from-top-2";
+                div.innerHTML = `
+                    <button onclick="removeEntry('${type}', ${item.id})" class="absolute top-2 right-2 text-slate-300 hover:text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    <div class="grid gap-3">
+                        <input type="text" placeholder="Instansi" value="${item.title}" oninput="updateField('${type}', ${item.id}, 'title', this.value)" class="w-full bg-transparent font-bold border-b border-slate-200 outline-none focus:border-navy text-sm">
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="Posisi" value="${item.subtitle}" oninput="updateField('${type}', ${item.id}, 'subtitle', this.value)" class="flex-1 bg-transparent border-b border-slate-200 outline-none text-xs">
+                            <input type="text" placeholder="Tahun" value="${item.date}" oninput="updateField('${type}', ${item.id}, 'date', this.value)" class="w-24 bg-transparent border-b border-slate-200 outline-none text-xs">
+                        </div>
+                        <textarea placeholder="Deskripsi singkat..." oninput="updateField('${type}', ${item.id}, 'desc', this.value)" class="w-full bg-white/50 p-2 rounded-lg text-[10px] h-16 outline-none">${item.desc}</textarea>
+                    </div>
+                `;
+                container.appendChild(div);
             });
-            document.querySelector('section.flex-1').scrollTo({ top: 0, behavior: 'smooth' });
             lucide.createIcons();
         }
 
-        function addEntry(type) {
-            data[type].push({ id: Date.now(), title: '', subtitle: '', location: '', date: '', desc: '' });
-            renderList(type);
+        function updateField(type, id, field, val) {
+            const item = data[type].find(i => i.id === id);
+            if(item) item[field] = val;
             updateCV();
         }
 
@@ -405,204 +395,103 @@
             updateCV();
         }
 
-        function updateField(type, id, field, val) {
-            const item = data[type].find(i => i.id === id);
-            if(item) item[field] = val;
-            updateCV();
-        }
-
-        function renderList(type) {
-            const container = document.getElementById(`${type}-list`);
-            if(!container) return;
-            container.innerHTML = '';
-            data[type].forEach(item => {
-                const div = document.createElement('div');
-                div.className = "input-card relative group border-l-[6px] border-l-navy mb-4 hover:border-l-gold transition-all duration-300";
-                div.innerHTML = `
-                    <button onclick="removeEntry('${type}', ${item.id})" class="absolute top-4 right-4 text-slate-300 hover:text-red-500 transition"><i data-lucide="trash-2" class="w-5 h-5"></i></button>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="md:col-span-2">
-                            <label class="text-[9px] font-black text-slate-400 uppercase mb-1 block">${type === 'education' ? 'Institusi' : (type === 'organization' ? 'Nama Organisasi' : 'Nama Instansi')}</label>
-                            <input type="text" placeholder="..." value="${item.title}" oninput="updateField('${type}', ${item.id}, 'title', this.value)" class="w-full text-sm font-bold bg-transparent border-b border-slate-100 outline-none focus:border-gold py-1">
-                        </div>
-                        <div>
-                            <label class="text-[9px] font-black text-slate-400 uppercase mb-1 block">${type === 'education' ? 'Gelar/Bidang' : 'Jabatan'}</label>
-                            <input type="text" placeholder="..." value="${item.subtitle}" oninput="updateField('${type}', ${item.id}, 'subtitle', this.value)" class="w-full text-xs font-semibold text-navy outline-none">
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div><label class="text-[9px] font-black text-slate-400 uppercase mb-1 block">Lokasi</label><input type="text" value="${item.location}" oninput="updateField('${type}', ${item.id}, 'location', this.value)" class="text-[10px] w-full p-2 bg-slate-50 rounded-lg outline-none"></div>
-                            <div><label class="text-[9px] font-black text-slate-400 uppercase mb-1 block">Periode</label><input type="text" value="${item.date}" oninput="updateField('${type}', ${item.id}, 'date', this.value)" class="text-[10px] w-full p-2 bg-slate-50 rounded-lg outline-none"></div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="text-[9px] font-black text-slate-400 uppercase mb-1 block">Deskripsi Detail</label>
-                            <textarea oninput="updateField('${type}', ${item.id}, 'desc', this.value)" class="w-full p-3 text-[11px] bg-slate-50 rounded-xl h-24 resize-none outline-none leading-relaxed">${item.desc}</textarea>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-            lucide.createIcons();
-        }
-
-        function createNewPage(num) {
-            const page = document.createElement('div');
-            const marginClass = (num === 1) ? 'page-1' : 'page-multi';
-            page.className = `cv-page mb-8 ${marginClass}`;
-            page.innerHTML = `<div class="cv-content"></div>`;
-            return page;
-        }
-
+        // Render Engine CV
         function updateCV() {
             const container = document.getElementById('pages-container');
-            container.innerHTML = ''; 
-
-            let pageCount = 1;
-            let currentPage = createNewPage(pageCount);
-            container.appendChild(currentPage);
-            let contentArea = currentPage.querySelector('.cv-content');
-
-            const threshold = 1040; 
-
+            container.innerHTML = '';
+            
+            const page = document.createElement('div');
+            page.className = "cv-page";
+            
             const name = document.getElementById('in-name').value || 'NAMA LENGKAP';
-            const phone = document.getElementById('in-phone').value;
-            const email = document.getElementById('in-email').value;
-            const loc = document.getElementById('in-location').value;
+            const phone = document.getElementById('in-phone').value || '+62 8xx';
+            const email = document.getElementById('in-email').value || 'email@anda.com';
+            const loc = document.getElementById('in-location').value || 'Jakarta';
+            const skills = document.getElementById('in-skills').value;
 
-            // --- HEADER ---
-            if (currentTemplate === 'modern' && userPhotoBase64) {
-                const header = document.createElement('div');
-                header.style.display = 'flex';
-                header.style.alignItems = 'flex-start';
-                header.style.gap = '20pt';
-                header.style.borderBottom = '1.5pt solid black';
-                header.style.paddingBottom = '15pt';
-                header.style.marginBottom = '15pt';
-                header.innerHTML = `
-                    <div style="flex-shrink: 0; width: 90pt; height: 110pt; border: 1pt solid #ccc; overflow: hidden; border-radius: 2pt;">
-                        <img src="${userPhotoBase64}" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div style="flex: 1;">
-                        <div style="font-size: 20pt; font-weight: bold; text-transform: uppercase; color: black; margin-bottom: 5pt; line-height: 1.1;">${name}</div>
-                        <div style="font-size: 10pt; display: flex; flex-direction: column; gap: 2pt; color: black;">
-                            <div><span style="font-weight:bold;">Telepon:</span> ${phone}</div>
-                            <div><span style="font-weight:bold;">Email:</span> ${email}</div>
-                            <div><span style="font-weight:bold;">Alamat:</span> ${loc}</div>
+            let headerHTML = `
+                <div style="text-align:center; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:20px">
+                    <h1 style="margin:0; font-size:22pt; text-transform:uppercase">${name}</h1>
+                    <p style="margin:5px 0 0 0; font-size:10pt">${phone} | ${email} | ${loc}</p>
+                </div>
+            `;
+
+            if(currentTemplate === 'modern' && userPhotoBase64) {
+                headerHTML = `
+                    <div style="display:flex; gap:20px; border-bottom:2px solid black; padding-bottom:20px; margin-bottom:20px">
+                        <img src="${userPhotoBase64}" style="width:100px; height:130px; object-fit:cover; border:1px solid #ddd">
+                        <div style="flex:1">
+                            <h1 style="margin:0; font-size:22pt; text-transform:uppercase">${name}</h1>
+                            <p style="margin:10px 0; font-size:10pt"><b>Telepon:</b> ${phone}</p>
+                            <p style="margin:5px 0; font-size:10pt"><b>Email:</b> ${email}</p>
+                            <p style="margin:5px 0; font-size:10pt"><b>Lokasi:</b> ${loc}</p>
                         </div>
                     </div>
                 `;
-                contentArea.appendChild(header);
-            } else {
-                const header = document.createElement('div');
-                header.style.textAlign = 'center';
-                header.style.marginBottom = '12pt';
-                header.innerHTML = `
-                    <div style="font-size: 20pt; font-weight: bold; text-transform: uppercase; color: black;">${name}</div>
-                    <div style="font-size: 10pt; border-bottom: 1.5pt solid black; padding-bottom: 8pt; margin-top: 4pt; color: black;">
-                        ${phone} &bull; ${email} &bull; ${loc}
-                    </div>
-                `;
-                contentArea.appendChild(header);
             }
 
-            const summary = document.getElementById('in-summary').value;
-            if(summary) {
-                const sDiv = document.createElement('div');
-                sDiv.className = 'item-desc mb-3';
-                sDiv.style.fontStyle = 'italic';
-                sDiv.innerText = summary;
-                contentArea.appendChild(sDiv);
-            }
-
+            let bodyHTML = "";
             const sections = [
-                { title: 'Pengalaman Profesional', key: 'experience' },
-                { title: 'Riwayat Pendidikan', key: 'education' },
-                { title: 'Pengalaman Organisasi', key: 'organization' }
+                { t: 'Pengalaman Kerja', k: 'experience' },
+                { t: 'Riwayat Pendidikan', k: 'education' },
+                { t: 'Organisasi', k: 'organization' }
             ];
 
-            sections.forEach(sec => {
-                const items = data[sec.key];
-                if(items.length === 0) return;
-
-                const st = document.createElement('div');
-                st.className = 'section-title';
-                st.innerText = sec.title;
-                contentArea.appendChild(st);
-
-                items.forEach(item => {
-                    const iDiv = document.createElement('div');
-                    iDiv.className = 'mb-2';
-                    iDiv.innerHTML = `
-                        <div class="item-header">
-                            <div class="item-title-group">
-                                <span>${item.title || 'Judul'}</span>
-                                ${item.location ? '<span style="font-weight:normal;"> | ' + item.location + '</span>' : ''}
+            sections.forEach(s => {
+                if(data[s.k].length > 0) {
+                    bodyHTML += `<div style="border-bottom:1px solid #000; font-weight:bold; text-transform:uppercase; margin-top:15px; margin-bottom:10px">${s.t}</div>`;
+                    data[s.k].forEach(item => {
+                        bodyHTML += `
+                            <div style="margin-bottom:10px">
+                                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:11pt">
+                                    <span>${item.title || 'Instansi'}</span>
+                                    <span>${item.date}</span>
+                                </div>
+                                <div style="font-style:italic; font-size:10pt">${item.subtitle}</div>
+                                <div style="font-size:10pt; text-align:justify; margin-top:2px">${item.desc}</div>
                             </div>
-                            <div class="item-date">${item.date || ''}</div>
-                        </div>
-                        <div class="item-subtitle">${item.subtitle || ''}</div>
-                    `;
-                    contentArea.appendChild(iDiv);
-
-                    const points = item.desc ? item.desc.split('\n').filter(p => p.trim() !== '') : [];
-                    points.forEach(p => {
-                        const pTag = document.createElement('div');
-                        pTag.className = 'item-desc';
-                        pTag.style.paddingLeft = '14pt';
-                        pTag.style.textIndent = '-14pt';
-                        pTag.innerText = `\u2022 ${p}`;
-                        contentArea.appendChild(pTag);
-                        
-                        if (contentArea.scrollHeight > threshold) {
-                            contentArea.removeChild(pTag);
-                            pageCount++;
-                            currentPage = createNewPage(pageCount);
-                            container.appendChild(currentPage);
-                            contentArea = currentPage.querySelector('.cv-content');
-                            contentArea.appendChild(pTag);
-                        }
+                        `;
                     });
-                });
+                }
             });
 
-            const skills = document.getElementById('in-skills').value;
             if(skills) {
-                const skTitle = document.createElement('div');
-                skTitle.className = 'section-title';
-                skTitle.innerText = 'Keahlian & Kompetensi';
-                contentArea.appendChild(skTitle);
-                const skDiv = document.createElement('div');
-                skDiv.className = 'item-desc';
-                skDiv.innerText = skills;
-                contentArea.appendChild(skDiv);
+                bodyHTML += `
+                    <div style="border-bottom:1px solid #000; font-weight:bold; text-transform:uppercase; margin-top:15px; margin-bottom:5px">Keahlian & Kompetensi</div>
+                    <div style="font-size:10pt; line-height:1.4">${skills}</div>
+                `;
             }
+
+            page.innerHTML = headerHTML + bodyHTML;
+            container.appendChild(page);
         }
 
         async function handleDownload() {
-            const loading = document.getElementById('loading-overlay');
-            loading.style.display = 'flex';
+            const overlay = document.getElementById('loading-overlay');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            
             const element = document.getElementById('pages-container');
-            const name = document.getElementById('in-name').value || 'CV';
+            const name = document.getElementById('in-name').value || 'CV_User';
             
             const opt = {
                 margin: 0,
-                filename: `CV_Bapas_Jakpus_${name.replace(/\s+/g, '_')}.pdf`,
+                filename: `CV_BapasJakpus_${name}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 3, useCORS: true, letterRendering: true },
+                html2canvas: { scale: 3, useCORS: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
+
             try {
                 await html2pdf().set(opt).from(element).save();
             } finally {
-                loading.style.display = 'none';
+                overlay.classList.add('hidden');
             }
         }
 
-        window.onload = () => { 
-            renderList('experience');
-            renderList('education');
-            renderList('organization');
-            lucide.createIcons(); 
-            updateCV(); 
+        window.onload = () => {
+            lucide.createIcons();
+            updateCV();
         };
     </script>
 </body>
